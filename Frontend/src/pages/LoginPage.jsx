@@ -4,6 +4,10 @@ import { apiConnector } from "../services/apiConnector";
 import { endpoints } from "../services/api";
 // import "./Login.css";
 import Navbar from "../components/Navbar.jsx";
+import './LoginPage.css';
+import '../components/Navbar.css';
+
+
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");

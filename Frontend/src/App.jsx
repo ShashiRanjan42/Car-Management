@@ -6,6 +6,7 @@ import SignupPage from './pages/SignupPage'; // import SignupPage
 import Profile from './pages/profile';
 import AddCar from './pages/AddCar';
 import UpdateCar from './pages/Update';
+
 // import './styles/global.css';
 
 const App = () => {

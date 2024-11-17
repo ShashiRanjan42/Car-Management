@@ -45,39 +45,37 @@ const HomePage = () => {
   );
 
   return (
-    // <div className="homepage-container max-w-[80%]">
-    //   <Navbar></Navbar>
-    //   <h1 className="homepage-title">Car Listings</h1>
-    //   <div className="search-bar-container w-[10%]">
-    //     <input
-    //       type="text"
-    //       placeholder="Search cars by title..."
-    //       value={searchText}
-    //       onChange={(e) => setSearchText(e.target.value)}
-    //       className="search-bar"
-    //     />
-    //   </div>
-    //   {error && <p className="error-message">{error}</p>}
-    //   <div className="cars-container">
-    //     {filteredCars.length > 0 ? (
-    //       filteredCars.map((car) => (
-    //         <div key={car.id} className="car-card">
-    //           <img src={car.image} alt={car.title} className="car-image" />
-    //           <div className="car-info">
-    //             <h2 className="car-title">{car.title}</h2>
-    //             <p className="car-description">{car.description}</p>
-    //             <p className="car-price">Price: ${car.price}</p>
-    //           </div>
-    //         </div>
-    //       ))
-    //     ) : (
-    //       <p className="no-cars-message">No cars found matching your search.</p>
-    //     )}
-    //   </div>
-    // </div>
-    <div>
-      <Navbar></Navbar>
-      Home PAge
+    <div className="homepage-container max-w-[80%]">
+      <div className="">
+        <Navbar></Navbar>
+      </div>
+      <h1 className="homepage-title">Car Listings</h1>
+      <div className="search-bar-container w-[10%]">
+        <input
+          type="text"
+          placeholder="Search cars by title..."
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          className="search-bar"
+        />
+      </div>
+      {error && <p className="error-message">{error}</p>}
+      <div className="cars-container">
+        {filteredCars.length > 0 ? (
+          filteredCars.map((car) => (
+            <div key={car.id} className="car-card">
+              <img src={car.image} alt={car.title} className="car-image" />
+              <div className="car-info">
+                <h2 className="car-title">{car.title}</h2>
+                <p className="car-description">{car.description}</p>
+                <p className="car-price">Price: ${car.price}</p>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p className="no-cars-message">No cars found matching your search.</p>
+        )}
+      </div>
     </div>
   );
 };

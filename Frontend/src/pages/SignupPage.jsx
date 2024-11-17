@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiConnector } from "../services/apiConnector";
 import { endpoints } from "../services/api";
-// import "./Signup.css";
+ import "./SignupPage.css";
 import Navbar from "../components/Navbar.jsx";
 
 const SignupPage = () => {

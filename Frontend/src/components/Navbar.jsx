@@ -1,51 +1,56 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { FaUserCircle } from "react-icons/fa";
+import {jwtDecode} from "jwt-decode"; // Correct import
+import './Navbar.css';
 
 const Navbar = () => {
   const [user, setUser] = useState(null); // State to track user information
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Simulate user fetching
-    const userData = JSON.parse(localStorage.getItem("user"));
-    if (userData) {
-      setUser(userData);
+    // Fetch user from token
+    const token = localStorage.getItem("auth_token");
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        if (decoded?.name) {
+          setUser(decoded.name); // Set user name from token
+        }
+      } catch (error) {
+        console.error("Invalid token", error);
+        localStorage.removeItem("auth_token"); // Remove invalid token
+      }
     }
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("auth_token");
-    localStorage.removeItem("user");
     setUser(null);
     navigate("/login");
   };
 
   return (
-    <nav className="">
-      <div className="flex bg-orange-600">
-        <Link to="/">
-          <h1>C</h1>
-          <h3>arManagement</h3>
+    <nav className="navbar bg-orange-600 p-4 flex justify-between items-center pr-5">
+      {/* Left: Brand Name */}
+      <div className="logo">
+        <Link to="/" className="text-white font-bold text-xl">
+          CarManagement
         </Link>
       </div>
 
-      {/* Right: Authentication Buttons or User Info */}
-      <div className="flex items-center space-x-4">
+      {/* Right: User Info or Authentication Buttons */}
+      <div className="auth-section flex items-center space-x-4">
         {user ? (
-          <div className="flex items-center space-x-3">
-            {/* User Icon and Name */}
+          <div className="user-info flex items-center space-x-3">
             <FaUserCircle className="text-white text-2xl" />
-            <span className="text-white font-medium">{user.name}</span>
-            {/* Profile Button */}
+            <span className="text-white font-medium">{user}</span> {/* Show user name */}
             <button
               onClick={() => navigate("/profile")}
               className="bg-white text-blue-600 font-semibold py-2 px-4 rounded hover:bg-gray-100 transition"
             >
               Profile
             </button>
-            {/* Logout Button */}
             <button
               onClick={handleLogout}
               className="bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-600 transition"
@@ -54,22 +59,20 @@ const Navbar = () => {
             </button>
           </div>
         ) : (
-          <>
-            {/* Sign Up Button */}
+          <div className="auth-buttons flex items-center space-x-3">
             <button
               onClick={() => navigate("/signup")}
               className="bg-green-500 text-white font-semibold py-2 px-4 rounded hover:bg-green-600 transition"
             >
               Sign Up
             </button>
-            {/* Login Button */}
             <button
               onClick={() => navigate("/login")}
               className="bg-white text-blue-600 font-semibold py-2 px-4 rounded hover:bg-gray-100 transition"
             >
               Login
             </button>
-          </>
+          </div>
         )}
       </div>
     </nav>

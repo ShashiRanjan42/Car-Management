@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { apiConnector } from "../services/apiConnector";
 import { car } from "../services/api";
 import {jwtDecode} from "jwt-decode"; // Import jwt-decode for decoding the token
-// import "./ProfilePage.css";
+ import "./profile.css";
+import Navbar from "../components/Navbar";
 
 const ProfilePage = () => {
   const [user, setUser] = useState({}); // Initialize user state
@@ -75,44 +76,47 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="profile-container">
-      <h1 className="profile-header">Welcome, {user.name}</h1>
-      <p className="profile-email">{user.email}</p>
-      <button className="logout-button" onClick={handleLogout}>
-        Logout
-      </button>
-      <button className="add-car-button" onClick={() => navigate("/addCar")}>
-        Add Car
-      </button>
+    <div>
+        <Navbar></Navbar>
+      <div className="profile-container">
+        <h1 className="profile-header">Welcome, {user.name}</h1>
+        <p className="profile-email">{user.email}</p>
+        {/* <button className="logout-button" onClick={handleLogout}>
+          Logout
+        </button> */}
+        <button className="add-car-button" onClick={() => navigate("/addCar")}>
+          Add Car
+        </button>
 
-      <div className="car-list">
-        <h2>Your Cars</h2>
-        {userCars.length > 0 ? (
-          userCars.map((car) => (
-            <div key={car.id} className="car-card">
-              <img src={car.image} alt={car.title} className="car-image" />
-              <div className="car-info">
-                <h3>{car.title}</h3>
-                <p>{car.description}</p>
-                <p>Price: ${car.price}</p>
-                <button
-                  className="update-button"
-                  onClick={() => handleUpdateCar(car._id)}
-                >
-                  Update
-                </button>
-                <button
-                  className="delete-button"
-                  onClick={() => handleDeleteCar(car._id)}
-                >
-                  Delete
-                </button>
+        <div className="car-list">
+          <h2>Your Cars</h2>
+          {userCars.length > 0 ? (
+            userCars.map((car) => (
+              <div key={car.id} className="car-card">
+                <img src={car.image} alt={car.title} className="car-image" />
+                <div className="car-info">
+                  <h3>{car.title}</h3>
+                  <p>{car.description}</p>
+                  <p>Price: ${car.price}</p>
+                  <button
+                    className="update-button"
+                    onClick={() => handleUpdateCar(car._id)}
+                  >
+                    Update
+                  </button>
+                  <button
+                    className="delete-button"
+                    onClick={() => handleDeleteCar(car._id)}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
-            </div>
-          ))
-        ) : (
-          <p>No cars added by you yet.</p>
-        )}
+            ))
+          ) : (
+            <p>No cars added by you yet.</p>
+          )}
+        </div>
       </div>
     </div>
   );

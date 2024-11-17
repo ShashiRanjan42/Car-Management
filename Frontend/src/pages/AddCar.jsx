@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiConnector } from "../services/apiConnector";
 import { car } from "../services/api";
+import './AddCar.css';
+import Navbar from "../components/Navbar";
 
 const AddCarForm = () => {
   const navigate = useNavigate();
@@ -73,6 +75,8 @@ const AddCarForm = () => {
   };
 
   return (
+    <div>
+      <Navbar></Navbar>
     <div className="add-car-container">
       <h1>Add a New Car</h1>
       <form onSubmit={handleSubmit} className="add-car-form">
@@ -166,6 +170,7 @@ const AddCarForm = () => {
           Add Car
         </button>
       </form>
+    </div>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import AuthProvider from './context/AuthContext'; // Ensure correct import paths
 import CarProvider from './context/CarContext'; // Ensure correct import paths
-import "../index.css";
+import "./index.css";
 
 // Check for root element before rendering
 const rootElement = document.getElementById('root');
